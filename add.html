@@ -32,33 +32,32 @@
                 <h3><strong>Make a Reservation</strong></h3>
             </div>
             <div class="card-body">
-                <form method="POST" role="form">
+                <form role="form" id="addTable">
     
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" class="form-control" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="name">Number in Party</label>
-                    <input type="text" class="form-control" id="numberInParty3">
+                    <input type="text" class="form-control" name="numberInParty">
                 </div>
     
                 <div class="form-group">
                     <label for="role">Phone Number</label>
-                    <input type="text" class="form-control" id="phone">
+                    <input type="text" class="form-control" name="phone">
                 </div>
     
                 <div class="form-group">
                     <label for="age">Email</label>
-                    <input type="text" class="form-control" id="email">
+                    <input type="text" class="form-control" name="email">
                 </div>
-        
+                <div class="text-left">
+                    <button type="submit" class="btn btn-primary btn-md" id="add-btn">Submit</button>
+                </div>
                 </form>
                 <br>
-                <div class="text-left">
-                <button type="submit" class="btn btn-primary btn-md" id="add-btn">Submit</button>
-                </div>
             </div>
             <br>
             </div>
@@ -68,11 +67,23 @@
     <div class="row">
         <div class="col-12">
             <div>
-                <a href="api/tables" target="_blank">View Table JSON  </a> &nbsp; | &nbsp; <a href="api/waitlist" target="_blank">  View Waitlist JSON</a>
+                <a href="api/tables" target="_blank">View Table JSON  </a> &nbsp; | &nbsp; <a href="api/reservations" target="_blank">  View Waitlist JSON</a>
             </div>
          </div>
-    </div>      
-          
+    </div>        
   </div>
 
+  <script type="text/javascript">
+
+    //serialize to grab form as an object
+    $( "#addTable" ).on( "submit", function(event) {
+        event.preventDefault();
+        $.post("/api/makereservation", $( this ).serializeArray() )
+        .then(function(data) {
+            console.log(data); //ajax post to /api/makereservation
+        });
+    });
+  </script>
+
 </body>
+</html>
