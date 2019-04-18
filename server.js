@@ -3,7 +3,8 @@ let path = require('path');
 let fs = require('fs');
 
 let app = express();
-var PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3000;
+let tableFile = 'tables.js';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,22 +21,37 @@ app.get("/", function(req, res) {
 });
 
 
+
+
 // Functions
 // =============================================================
 
+let hasRes = [];
+let onWaiting = [];
+
 function getTables(){
-    fs.readFileSync('tables.js', 'utf8', function(error, data) {
-        if (error) {
-            console.log(error);
-        }
-        let tables = data.split(',');
-        tables.map(function(table){
-            console.log(table);
-        });
-    });
+    let tablesJSON = fs.readFileSync(tableFile, 'utf8');
+    tables = JSON.parse(tablesJSON);
+    return tables;
+}
+function getWaiting(){
+    let tables = getTables();
+    return tables.filter(t => !t.hasReservation)
+}
+function getReservations(){
+    let tables = getTables();
+    return tables.filter(t => t.hasReservation);
 }
 getTables();
+console.log(getWaiting());
+console.log(getReservations());
 
+function addTable(table){
+    tables
+    fs.writeFile(tableFile, table, function(error){
+        if (error) { console.log(error) }
+    });
+}
 
 
 // Starts the server to begin listening
