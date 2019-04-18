@@ -14,6 +14,41 @@ app.use(express.json());
 
 // Routes
 // =============================================================
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+app.get("/tables", function (req, res) {
+    res.sendFile(path.join(__dirname, "tables.html"));
+});
+
+app.get("/reservationform", function (req, res) {
+    res.sendFile(path.join(__dirname, "reservationForm.html"));
+});
+
+app.get("/api/tables", function(req, res) {
+    return res.json();
+  });
+
+  app.get("/api/reservations", function(req, res) {
+    return getReservations ();
+  });  
+
+app.post("/api/makereservation", function (req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    var newParty = req.body;
+
+    // Using a RegEx Pattern to remove spaces from newCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    newParty.routeName = newParty.name.replace(/\s+/g, "").toLowerCase();
+
+    console.log(newParty);
+
+    tables.push(newParty)
+
+    res.json(newParty);
+});
 
 // home
 app.get("/", function(req, res) {
