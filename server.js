@@ -27,11 +27,15 @@ app.get("/reservationform", function (req, res) {
 });
 
 app.get("/api/tables", function(req, res) {
-    return res.json();
+    return getTables();
   });
 
   app.get("/api/reservations", function(req, res) {
     return getReservations ();
+  });  
+
+  app.get("/api/waitlist", function(req, res) {
+    return getWaiting ();
   });  
 
 app.post("/api/makereservation", function (req, res) {
@@ -50,10 +54,7 @@ app.post("/api/makereservation", function (req, res) {
     res.json(newParty);
 });
 
-// home
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
+
 
 
 
