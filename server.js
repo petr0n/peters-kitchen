@@ -37,26 +37,14 @@ app.get("/api/reservations", function (req, res) {
     return getReservations();
 });
 
-  app.get("/api/waitlist", function(req, res) {
+app.get("/api/waitlist", function(req, res) {
     return getWaiting ();
-  });  
+});  
 
 app.post("/api/makereservation", function (req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
     var newParty = req.body;
     console.log(newParty);
     addTable(newParty);
-
-    // // Using a RegEx Pattern to remove spaces from newCharacter
-    // // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-    // newParty.routeName = newParty.name.replace(/\s+/g, "").toLowerCase();
-
-    // console.log(newParty);
-
-    // tables.push(newParty)
-
-    // res.json(newParty);
 });
 
 
@@ -79,9 +67,9 @@ function getReservations() {
 function addTable(newParty) {
     let tables = getTables();
     let tableCount = Object.keys(tables).length;
-
+    
     newParty.id = tableCount + 1;
-    newParty.hasReservation = true;
+    newParty.hasReservation = checkCapacity();
     console.log(newParty);
     fs.readFile(tableFile, function(err, tables){
         if (error) { console.log(error) }
@@ -91,10 +79,10 @@ function addTable(newParty) {
     });
 }
 
-function checkCapacity () {
+function checkCapacity() {
     let reservations = getReservations();
     let reservationsCount = Object.keys(reservations).length
-    return reservationsCount <= 10
+    return reservationsCount => 10
 }
 
 
