@@ -30,12 +30,16 @@ app.get("/addreservation", function (req, res) {
 
 // API ROUTES
 app.get("/api/tables", function (req, res) {
-    return res.json();
+    return getTables();
 });
 
 app.get("/api/reservations", function (req, res) {
     return getReservations();
 });
+
+  app.get("/api/waitlist", function(req, res) {
+    return getWaiting ();
+  });  
 
 app.post("/api/makereservation", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
@@ -83,6 +87,12 @@ function addTable(newParty) {
     // });
 }
 addTable();
+
+function checkCapacity () {
+    let reservations = getReservations();
+    let reservationsCount = Object.keys(reservations).length
+    return reservationsCount <= 10
+}
 
 
 // Starts the server to begin listening
