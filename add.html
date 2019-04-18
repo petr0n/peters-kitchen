@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Peter's Kitchen</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    
+    <div class="jumbotron">
+            <h1 class="text-center">Peter's Kitchen</h1>
+            <h3 class="text-center">A small table count restaurant | Established 1988</h3>
+            <br>
+            <hr>
+            <br>
+            <div class="text-center">
+                <a href="/add"><button class="btn btn-warning btn-lg"> View Tables</button></a>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+            <div class="card-header">
+                <h3><strong>Make a Reservation</strong></h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" role="form">
+    
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Number in Party</label>
+                    <input type="text" class="form-control" id="numberInParty3">
+                </div>
+    
+                <div class="form-group">
+                    <label for="role">Phone Number</label>
+                    <input type="text" class="form-control" id="phone">
+                </div>
+    
+                <div class="form-group">
+                    <label for="age">Email</label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+        
+                </form>
+                <br>
+                <div class="text-left">
+                <button type="submit" class="btn btn-primary btn-md" id="add-btn">Submit</button>
+                </div>
+            </div>
+            <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div>
+                <a href="api/tables" target="_blank">View Table JSON  </a> &nbsp; | &nbsp; <a href="api/waitlist" target="_blank">  View Waitlist JSON</a>
+            </div>
+         </div>
+    </div>      
+          
+  </div>
+
+</body>
