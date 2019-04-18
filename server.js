@@ -19,8 +19,8 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "home.html"));
 });
 
-app.get("/tables", function (req, res) {
-    res.sendFile(path.join(__dirname, "tables.html"));
+app.get("/view", function (req, res) {
+    res.sendFile(path.join(__dirname, "view.html"));
 });
 
 app.get("/addreservation", function (req, res) {
@@ -43,7 +43,7 @@ app.get("/api/waitlist", function(req, res) {
 
 app.post("/api/makereservation", function (req, res) {
     var newParty = req.body;
-    console.log(newParty);
+    // console.log(newParty);
     addTable(newParty);
 });
 
@@ -67,22 +67,22 @@ function getReservations() {
 function addTable(newParty) {
     let tables = getTables();
     let tableCount = Object.keys(tables).length;
-    
     newParty.id = tableCount + 1;
-    newParty.hasReservation = checkCapacity();
+    newParty.hasReservation = checkCapacity() ? true : false;
     console.log(newParty);
-    fs.readFile(tableFile, function(err, tables){
-        if (error) { console.log(error) }
-        const tables = JSON.parse(tables)
-        tables.push(newParty)
-        fs.writeFile(tableFile, JSON.stringify(tables))
+    fs.readFile(tableFile, function(err, data){
+        if (err) { console.log(error) }
+        const tablesJSON = JSON.parse(data)
+        tablesJSON.push(newParty)
+        fs.writeFileSync(tableFile, JSON.stringify(tablesJSON));
     });
+    return newParty.hasReservation ? 'You\'ve been added to the reservation list.' : 'Sorry, the reservation list is full but you are now on the wait list.'
 }
 
 function checkCapacity() {
     let reservations = getReservations();
     let reservationsCount = Object.keys(reservations).length
-    return reservationsCount => 10
+    return reservationsCount => 10;
 }
 
 
