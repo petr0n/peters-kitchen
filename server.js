@@ -30,7 +30,7 @@ app.get("/addreservation", function (req, res) {
 
 // API ROUTES
 app.get("/api/tables", function (req, res) {
-    return res.json();
+    return getTables();
 });
 
 app.get("/api/reservations", function (req, res) {
@@ -89,6 +89,12 @@ function addTable(newParty) {
         tables.push(newParty)
         fs.writeFile(tableFile, JSON.stringify(tables))
     });
+}
+
+function checkCapacity () {
+    let reservations = getReservations();
+    let reservationsCount = Object.keys(reservations).length
+    return reservationsCount <= 10
 }
 
 
