@@ -25,10 +25,6 @@ app.get("/", function(req, res) {
 
 // Functions
 // =============================================================
-
-let hasRes = [];
-let onWaiting = [];
-
 function getTables(){
     let tablesJSON = fs.readFileSync(tableFile, 'utf8');
     tables = JSON.parse(tablesJSON);
@@ -44,14 +40,17 @@ function getReservations(){
 }
 getTables();
 console.log(getWaiting());
-console.log(getReservations());
+// console.log(getReservations());
 
-function addTable(table){
-    tables
-    fs.writeFile(tableFile, table, function(error){
-        if (error) { console.log(error) }
-    });
+function addTable(){
+    let tables = getTables();
+    let tableCount = Object.keys(tables).length;
+    
+    // fs.writeFile(tableFile, table, function(error){
+    //     if (error) { console.log(error) }
+    // });
 }
+addTable();
 
 
 // Starts the server to begin listening
