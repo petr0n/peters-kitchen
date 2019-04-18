@@ -39,7 +39,7 @@ function getReservations(){
     return tables.filter(t => t.hasReservation);
 }
 getTables();
-console.log(getWaiting());
+// console.log(getWaiting());
 // console.log(getReservations());
 
 function addTable(){
