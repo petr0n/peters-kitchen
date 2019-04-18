@@ -75,22 +75,21 @@ function getReservations() {
     let tables = getTables();
     return tables.filter(t => t.hasReservation);
 }
-// getTables();
-// console.log(getWaiting());
-// console.log(getReservations());
 
 function addTable(newParty) {
     let tables = getTables();
     let tableCount = Object.keys(tables).length;
 
-    newParty['id'] = tableCount + 1;
-    newParty['hasReservation'] = true;
+    newParty.id = tableCount + 1;
+    newParty.hasReservation = true;
     console.log(newParty);
-    // fs.writeFile(tableFile, table, function(error){
-    //     if (error) { console.log(error) }
-    // });
+    fs.readFile(tableFile, function(err, tables){
+        if (error) { console.log(error) }
+        const tables = JSON.parse(tables)
+        tables.push(newParty)
+        fs.writeFile(tableFile, JSON.stringify(tables))
+    });
 }
-addTable();
 
 
 // Starts the server to begin listening
