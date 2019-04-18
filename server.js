@@ -71,7 +71,7 @@ function getReservations() {
     let tables = getTables();
     return tables.filter(t => t.hasReservation);
 }
-getTables();
+// getTables();
 // console.log(getWaiting());
 // console.log(getReservations());
 
@@ -79,6 +79,9 @@ function addTable(newParty) {
     let tables = getTables();
     let tableCount = Object.keys(tables).length;
 
+    newParty['id'] = tableCount + 1;
+    newParty['hasReservation'] = true;
+    console.log(newParty);
     // fs.writeFile(tableFile, table, function(error){
     //     if (error) { console.log(error) }
     // });
