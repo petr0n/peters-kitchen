@@ -37,6 +37,10 @@ app.get("/api/reservations", function (req, res) {
     return getReservations();
 });
 
+  app.get("/api/waitlist", function(req, res) {
+    return getWaiting ();
+  });  
+
 app.post("/api/makereservation", function (req, res) {
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
