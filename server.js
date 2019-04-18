@@ -88,6 +88,12 @@ function addTable(newParty) {
 }
 addTable();
 
+function checkCapacity () {
+    let reservations = getReservations();
+    let reservationsCount = Object.keys(reservations).length
+    return reservationsCount <= 10
+}
+
 
 // Starts the server to begin listening
 // =============================================================
